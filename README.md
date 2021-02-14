@@ -1,4 +1,4 @@
-based on blog https://medium.com/learning-cloud-native-go/lets-get-it-started-dc4634ef03b
+Based on blog https://medium.com/learning-cloud-native-go/lets-get-it-started-dc4634ef03b
 
 # build the compose
 
