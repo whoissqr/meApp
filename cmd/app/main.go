@@ -4,21 +4,24 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
+
+        "meApp/config"
 )
 
 func main() {
+        appConf := config.AppConfig()
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", Greet)
+        address := fmt.Sprintf(":%d", appConf.Server.Port)
 
 	log.Println("Starting server :8080")
 
 	s := &http.Server{
-		Addr:         ":8080",
+		Addr:         address,
 		Handler:      mux,
-		ReadTimeout:  30 * time.Second,
-		WriteTimeout: 30 * time.Second,
-		IdleTimeout:  120 * time.Second,
+		ReadTimeout:  appConf.Server.TimeoutRead,
+		WriteTimeout: appConf.Server.TimeoutWrite,
+		IdleTimeout:  appConf.Server.TimeoutIdle,
 	}
 
 	if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
